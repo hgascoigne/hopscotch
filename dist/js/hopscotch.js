@@ -576,6 +576,7 @@
     prev:  [],
     start: [],
     end:   [],
+    beforeShow: [],
     show:  [],
     error: [],
     close: []
@@ -1872,7 +1873,7 @@
       // loadTour if we are calling startTour directly. (When we call startTour
       // from window onLoad handler, we'll use currTour)
       if (!currTour) {
-        
+
         // Sanity check! Is there a tour?
         if(!tour){
           throw new Error('Tour data is required for startTour.');
@@ -1967,6 +1968,8 @@
         currStepNum = prevStepNum;
         return;
       }
+
+      utils.invokeEventCallbacks('beforeShow', step.onBeforeShow);
 
       if (step.delay) {
         setTimeout(function() {
